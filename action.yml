@@ -1,0 +1,14 @@
+name: 'Setup TON cli tools'
+description: 'Set up the latest version of TON cli tools for github actions'
+branding:
+  icon: play
+  color: green
+
+inputs:
+  gitHubToken:
+    description: 'Token to access to github'
+    required: true
+    
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
