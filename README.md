@@ -25,9 +25,9 @@ steps:
   with:
     gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 - run: |
-  tonos-cli --help
-  solc --help
-  tvm_linker --help
+  tonos-cli --version
+  solc --version
+  tvm_linker --version
 ```
 
 # Don't forget to tip
