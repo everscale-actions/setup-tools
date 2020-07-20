@@ -22,6 +22,8 @@ See [action.yml](action.yml)
 steps:
 - uses: actions/checkout@main
 - uses: ton-actions/setup-tools@v1
+  with:
+    gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 - run: |
   tonos-cli --help
   solc --help
