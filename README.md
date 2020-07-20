@@ -20,7 +20,6 @@ See [action.yml](action.yml)
 
 ```yaml
 steps:
-- uses: actions/checkout@main
 - uses: ton-actions/setup-tools@v1
   with:
     gitHubToken: ${{ secrets.GITHUB_TOKEN }}
