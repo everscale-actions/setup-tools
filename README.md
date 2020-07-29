@@ -2,6 +2,7 @@
 
 <p align="left">
   <a href="https://github.com/ton-actions/setup-tools"><img alt="GitHub Actions status" src="https://github.com/ton-actions/setup-tools/workflows/Main%20workflow/badge.svg"></a>
+  <a href="https://github.com/ton-actions/build-tonos-cli"><img alt="GitHub Actions status" src="https://github.com/ton-actions/build-tonos-cli/workflows/Build%20and%20release%20tonos-cli/badge.svg"></a>
   <a href="https://github.com/ton-actions/build-solc"><img alt="GitHub Actions status" src="https://github.com/ton-actions/build-solc/workflows/Build%20and%20release%20solidity%20compiler/badge.svg"></a>
   <a href="https://github.com/ton-actions/build-tvm-linker"><img alt="GitHub Actions status" src="https://github.com/ton-actions/build-tvm-linker/workflows/Build%20and%20release%20TVM-Linker/badge.svg"></a>
 </p>

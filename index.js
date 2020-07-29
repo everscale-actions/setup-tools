@@ -24,8 +24,8 @@ const tools = [
     },
     {
         name: 'tonos-cli',
-        repoOwner: 'tonlabs',
-        repoName: 'tonos-cli',
+        repoOwner: 'ton-actions',
+        repoName: 'build-tonos-cli',
         assetPrefix: 'tonos-cli',
         addToPath: true
     },
