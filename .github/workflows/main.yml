@@ -7,8 +7,11 @@ on:
     - cron:  '0 1 * * *'
 
 jobs:          
-  test-solc:
-    runs-on: ubuntu-latest
+  test-solc:    
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
     env:
       SOLC_HELP_REGEXP: "^solc, the Solidity commandline compiler.*$"
     steps:
@@ -27,7 +30,10 @@ jobs:
           if [[ $TVM_LINKER_LIB_PATH ]]; then echo TVM_LINKER_LIB_PATH was set to $TVM_LINKER_LIB_PATH; else { echo "TVM_LINKER_LIB_PATH was not set"; exit 1; }; fi
           
   test-ton-cli:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
     env:
       TONOS_CLI_HELP_REGEXP: "^.*TONLabs console tool for TON.*$"
     steps:
@@ -45,7 +51,10 @@ jobs:
           if [[ $(tonos-cli --help) =~ [$TONOS_CLI_HELP_REGEXP] ]]; then echo tonos-cli works fine; else { echo "tonos-cli is not working"; exit 1; }; fi      
 
   test-tvm_linker:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-16.04, ubuntu-18.04, ubuntu-20.04]
     env:
       TONOS_LINKER_HELP_REGEXP: "^.*Linker for TVM assembly.*$"
     steps:
