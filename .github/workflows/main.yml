@@ -7,12 +7,10 @@ on:
     - cron:  '0 1 * * *'
 
 jobs:          
-  install-n-tests:
+  test-solc:
     runs-on: ubuntu-latest
     env:
       SOLC_HELP_REGEXP: "^solc, the Solidity commandline compiler.*$"
-      TONOS_CLI_HELP_REGEXP: "^.*TONLabs console tool for TON.*$"
-      TONOS_LINKER_HELP_REGEXP: "^.*Linker for TVM assembly.*$"
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -22,13 +20,44 @@ jobs:
         with:
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
         
-      - name: Tests tools
+      - name: Tests tool
         run: |  
-          ls -al tools
           if [[ $(whereis solc) != "solc:" ]]; then echo solc was found; else { echo "solc not found"; exit 1; }; fi         
           if [[ $(solc --help) =~ [$SOLC_HELP_REGEXP] ]]; then echo solc works fine; else { echo "solc is not working"; exit 1; }; fi
           if [[ $TVM_LINKER_LIB_PATH ]]; then echo TVM_LINKER_LIB_PATH was set to $TVM_LINKER_LIB_PATH; else { echo "TVM_LINKER_LIB_PATH was not set"; exit 1; }; fi
+          
+  test-ton-cli:
+    runs-on: ubuntu-latest
+    env:
+      TONOS_CLI_HELP_REGEXP: "^.*TONLabs console tool for TON.*$"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install tools
+        uses: ./
+        with:
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tests tool
+        run: |
           if [[ $(whereis tonos-cli) != "tonos-cli:" ]]; then echo tonos-cli was found; else { echo "tonos-cli not found"; exit 1; }; fi
-          if [[ $(tonos-cli --help) =~ [$TONOS_CLI_HELP_REGEXP] ]]; then echo tonos-cli works fine; else { echo "tonos-cli is not working"; exit 1; }; fi       
+          if [[ $(tonos-cli --help) =~ [$TONOS_CLI_HELP_REGEXP] ]]; then echo tonos-cli works fine; else { echo "tonos-cli is not working"; exit 1; }; fi      
+
+  test-tvm_linker:
+    runs-on: ubuntu-latest
+    env:
+      TONOS_LINKER_HELP_REGEXP: "^.*Linker for TVM assembly.*$"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Install tools
+        uses: ./
+        with:
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Tests tools
+        run: | 
           if [[ $(whereis tvm_linker) != "tvm_linker:" ]]; then echo tvm_linker was found; else { echo "tvm_linker not found"; exit 1; }; fi
-          if [[ $(tvm_linker --help) =~ [$TONOS_LINKER_HELP_REGEXP] ]]; then echo tvm_linker works fine; else { echo "tvm_linker is not working"; exit 1; }; fi
+          if [[ $(tvm_linker --help) =~ [$TONOS_LINKER_HELP_REGEXP] ]]; then echo tvm_linker works fine; else { echo "tvm_linker is not working"; exit 1; }; fi          
